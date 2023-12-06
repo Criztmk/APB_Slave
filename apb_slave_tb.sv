@@ -27,7 +27,7 @@ module apb_slave_tb();
     #5;
    //calling write and Read task
     Write();
-    #10;
+    repeat(4) idle();
     Read();
     #10
     $finish;
@@ -75,6 +75,14 @@ end
 end
  endtask
   
+   task idle();
+     @(posedge pclk);
+    psel = 0;
+    penb = 0;
+    pwrite = 0;
+    paddr = 0;
+    pwdata = 0;
+  endtask
   
   initial begin
     // Dump waves
